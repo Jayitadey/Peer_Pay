@@ -1,0 +1,63 @@
+
+.withdraw-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #0d0d0d;
+  height: 100vh;
+  color: #cce7c3;
+}
+
+.withdraw-box {
+  background-color: #1a1a1a;
+  padding: 40px;
+  border-radius: 16px;
+  width: 350px;
+  box-shadow: 0 0 15px rgba(0, 255, 100, 0.15);
+}
+
+.withdraw-title {
+  text-align: center;
+  margin-bottom: 24px;
+  font-size: 24px;
+}
+
+.withdraw-form label {
+  display: block;
+  margin-top: 10px;
+  color: #aaffaa;
+}
+
+.withdraw-form input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 6px;
+  border: none;
+  border-radius: 8px;
+  background-color: #111;
+  color: white;
+}
+
+.withdraw-form button {
+  width: 100%;
+  margin-top: 20px;
+  padding: 12px;
+  background-color: #3c6;
+  border: none;
+  color: black;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.withdraw-success {
+  margin-top: 12px;
+  color: #6f6;
+  text-align: center;
+}
+
+.withdraw-error {
+  margin-top: 12px;
+  color: #f66;
+  text-align: center;
+}

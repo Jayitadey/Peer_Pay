@@ -4,21 +4,25 @@ const transactionSchema = new mongoose.Schema({
   userId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
-    required: true
+    required: true, // Sender
+  },
+  recipientId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User", // Optional, for transfers only
   },
   type: {
     type: String,
-    enum: ["deposit", "withdraw"],
-    required: true
+    enum: ["deposit", "withdraw", "transfer","received"],
+    required: true,
   },
   amount: {
     type: Number,
-    required: true
+    required: true,
   },
   timestamp: {
     type: Date,
-    default: Date.now
-  }
+    default: Date.now,
+  },
 });
 
 module.exports = mongoose.model("Transaction", transactionSchema);

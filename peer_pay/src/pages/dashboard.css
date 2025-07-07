@@ -23,7 +23,7 @@ body {
   border-bottom: 1px solid #1c1c1c;
 }
 
-.dashboard-header h1 {
+.dashboard-header h1,span {
   color: #70db70;
   margin: 0;
 }

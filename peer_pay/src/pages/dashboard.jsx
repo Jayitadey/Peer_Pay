@@ -1,9 +1,19 @@
 import { Link } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./dashboard.css";
 
 function Dashboard() {
   const [activeTab, setActiveTab] = useState("balance");
+  const [username, setUsername] = useState("");
+
+  useEffect(() => {
+    // Get user info from localStorage (set after login)
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      const user = JSON.parse(storedUser);
+      setUsername(user.username || "User");
+    }
+  }, []);
 
   return (
     <div className="dashboard-container">
@@ -11,22 +21,27 @@ function Dashboard() {
         <h1>Peer Pay</h1>
         <nav className="dashboard-nav">
           <Link to="/balance">
-          <button onClick={() => setActiveTab("balance")}>View Balance</button>
+            <button onClick={() => setActiveTab("balance")}>View Balance</button>
           </Link>
-          
-          <button onClick={() => setActiveTab("transfer")}>One-to-One Transaction</button>
+          <Link to="/121">
+            <button onClick={() => setActiveTab("transfer")}>One-to-One Transaction</button>
+          </Link>
           <Link to="/transaction">
-          <button onClick={() => setActiveTab("history")}>Transaction History</button>
+            <button onClick={() => setActiveTab("history")}>Transaction History</button>
           </Link>
           <Link to="/deposit">
-           <button onClick={() => setActiveTab("deposit")}>Deposit Money</button>
-         </Link>
+            <button onClick={() => setActiveTab("deposit")}>Deposit Money</button>
+          </Link>
+          <Link to="/withdraw">
+            <button onClick={() => setActiveTab("withdraw")}>Withdraw</button>
+          </Link>
         </nav>
       </header>
-
+   <span className="dashboard-user">Welcome, {username}</span>
       <main className="dashboard-main">
         {activeTab === "balance" && (
           <section className="dashboard-section">
+            {/* Your balance component will go here */}
           </section>
         )}
 

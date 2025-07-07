@@ -17,6 +17,9 @@ import Dashboard from "./pages/dashboard";
 import Deposit from "./pages/deposit";
 import ViewBalance from "./pages/balance";
 import TransactionHistory from "./pages/transaction";
+import Transfer from "./pages/121";
+import Withdraw from "./pages/withdraw";
+
 function App() {
   return (
     <Router>
@@ -28,6 +31,8 @@ function App() {
         <Route path="/deposit" element={<Deposit />} />
         <Route path="/balance" element={<ViewBalance />} />
         <Route path="/transaction" element={<TransactionHistory />} />
+        <Route path="/121" element={<Transfer />} />
+        <Route path="/withdraw" element={<Withdraw />} />
       </Routes>
     </Router>
   );
