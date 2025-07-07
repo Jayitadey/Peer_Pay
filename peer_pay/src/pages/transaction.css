@@ -1,0 +1,70 @@
+body {
+  background-color: #000;
+  color: #d0ffd0;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.history-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 90vh;
+  padding: 20px;
+}
+
+.history-box {
+  background-color: #111;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 255, 0, 0.2);
+  width: 100%;
+  max-width: 600px;
+}
+
+.history-title {
+  text-align: center;
+  color: #98fb98;
+  margin-bottom: 20px;
+  font-size: 22px;
+}
+
+.history-error {
+  color: red;
+  text-align: center;
+}
+
+.history-empty {
+  text-align: center;
+  font-style: italic;
+  color: #aaa;
+}
+
+.history-list {
+  list-style: none;
+  padding: 0;
+}
+
+.history-item {
+  display: flex;
+  justify-content: space-between;
+  background-color: #1a1a1a;
+  padding: 10px 15px;
+  margin-bottom: 10px;
+  border-left: 4px solid #4CAF50;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.txn-type {
+  font-weight: bold;
+  color: #adff2f;
+}
+
+.txn-amount {
+  color: #90ee90;
+}
+
+.txn-date {
+  color: #666;
+  font-size: 12px;
+}

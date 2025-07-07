@@ -1,0 +1,38 @@
+body {
+  background-color: #000;
+  color: #d0ffd0;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.balance-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 90vh;
+}
+
+.balance-box {
+  background-color: #111;
+  padding: 30px 40px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 255, 0, 0.2);
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.balance-title {
+  font-size: 22px;
+  color: #9acd32;
+  margin-bottom: 20px;
+}
+
+.balance-amount {
+  font-size: 30px;
+  font-weight: bold;
+  color: #adff2f;
+}
+
+.balance-error {
+  color: red;
+}

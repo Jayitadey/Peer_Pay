@@ -1,0 +1,62 @@
+body {
+  background-color: #000;
+  color: #d0ffd0;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.deposit-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 90vh;
+}
+
+.deposit-box {
+  background-color: #111;
+  padding: 30px 40px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 255, 0, 0.2);
+  width: 90%;
+  max-width: 400px;
+}
+
+.deposit-title {
+  text-align: center;
+  color: #98fb98;
+  margin-bottom: 20px;
+}
+
+.deposit-form label {
+  display: block;
+  margin: 10px 0 5px;
+}
+
+.deposit-form input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #2d5f2d;
+  border-radius: 5px;
+  background-color: #000;
+  color: #d0ffd0;
+}
+
+.deposit-form button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 15px;
+  background-color: #3a5f3a;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.deposit-form button:hover {
+  background-color: #4f754f;
+}
+
+.deposit-message {
+  text-align: center;
+  margin-top: 20px;
+  color: #9fef9f;
+}
