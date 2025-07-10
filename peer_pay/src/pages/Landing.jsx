@@ -5,7 +5,7 @@ function LandingPage() {
   return (
     <div className="landing-container">
       <header className="landing-header">
-        <h1 className="brand-name">MyBank Pro</h1>
+        <h1 className="brand-name">Peer Pay</h1>
         <nav className="nav-links">
           <a href="#">Home</a>
           <a href="#">Features</a>
@@ -17,17 +17,17 @@ function LandingPage() {
         </nav>
       </header>
       <main className="landing-main">
-        <h2 className="headline">Your Personal Offline Banking System</h2>
+        <h2 className="headline">Your Personal Banking Simulator</h2>
         <p className="subtext">
-          Safe. Simple. Secure. Anytime, even without the internet.
+         .Seamless Payments Between Peers.
         </p>
-
+     <Link to="/Login">
   <button className="cta-button">Get Started</button>
-
+</Link>
       </main>
 
       <footer className="landing-footer">
-        <p>&copy; 2025 MyBank Pro. All rights reserved.</p>
+        <p>&copy; 2025 Peer Pay. All rights reserved.</p>
       </footer>
     </div>
   );

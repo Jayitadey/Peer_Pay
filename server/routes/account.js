@@ -70,14 +70,21 @@ router.get("/balance", verifyToken, async (req, res) => {
   }
 });
 
-
 router.get("/history", verifyToken, async (req, res) => {
   try {
-    const transactions = await Transaction.find({ userId: req.user.id })
-      .sort({ timestamp: -1 })
-      .populate("recipientId", "email username")  // Optional but useful
-      .exec();
+    const userId = req.user.id;
 
+    const transactions = await Transaction.find({
+      $or: [
+        { userId: userId },
+        { recipientId: userId }
+      ]
+    })
+      .sort({ timestamp: -1 })
+      .populate("userId", "username email") // sender
+      .populate("recipientId", "username email") // receiver or sender (depending on context)
+      .exec();
+      
     res.json({ transactions });
   } catch (err) {
     console.error(err);

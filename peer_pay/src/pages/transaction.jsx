@@ -49,16 +49,34 @@ const TransactionHistory = () => {
           <p className="history-empty">No transactions yet.</p>
         ) : (
           <ul className="history-list">
-           {transactions
-  .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp)) // 🔽 newest first
-  .map((txn, index) => (
-    <li key={index} className="history-item">
-      <span className="txn-type">{txn.type}</span>
-      <span className="txn-amount">₹ {txn.amount}</span>
-      <span className="txn-date">{new Date(txn.timestamp).toLocaleString()}</span>
-    </li>
-))}
-          </ul>
+  {transactions
+    .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
+    .map((txn, index) => (
+     
+<li key={txn._id || index} className="history-item">
+  <span className="txn-type">
+  {txn.type === "transfer"
+    ? `Sent to ${txn.recipientId?.username || "Unknown"}`
+    : txn.type === "received"
+    ? `Received from ${txn.recipientId?.username || "Unknown"}`
+    : txn.type === "deposit"
+    ? `Deposited ₹${txn.amount}`
+    : txn.type === "withdraw"
+    ? `Withdrew ₹${txn.amount}`
+    : txn.type}
+</span>
+
+  <span className="txn-amount">₹ {txn.amount}</span>
+
+  <span className="txn-date">
+    {txn.timestamp ? new Date(txn.timestamp).toLocaleString() : "Date not available"}
+  </span>
+</li>
+
+     
+    ))}
+</ul>
+        
         )}
       </div>
     </div>

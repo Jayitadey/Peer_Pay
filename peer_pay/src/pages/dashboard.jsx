@@ -37,7 +37,8 @@ function Dashboard() {
           </Link>
         </nav>
       </header>
-   <span className="dashboard-user">Welcome, {username}</span>
+      
+   <div className="dashboard-user"><b>Welcome, {username}!</b></div> 
       <main className="dashboard-main">
         {activeTab === "balance" && (
           <section className="dashboard-section">
