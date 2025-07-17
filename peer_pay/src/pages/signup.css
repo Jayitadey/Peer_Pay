@@ -1,4 +1,4 @@
-/* Dark theme - black and green signup form */
+/* Dark theme - black and green signup form with OTP support */
 
 body {
   margin: 0;
@@ -14,16 +14,19 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 1rem;
+  animation: fadeIn 0.8s ease-in;
 }
 
 .signup-box {
   background-color: #111;
   padding: 2rem 2.5rem;
   border-radius: 12px;
-  box-shadow: 0 0 12px #1c1c1c;
+  box-shadow: 0 0 15px rgba(112, 255, 112, 0.1);
   width: 100%;
   max-width: 420px;
   color: #a2f5a2;
+  animation: slideUp 0.5s ease;
 }
 
 .signup-title {
@@ -50,25 +53,37 @@ body {
   background-color: #1f1f1f;
   color: #e0ffe0;
   margin-bottom: 1rem;
+  transition: background-color 0.3s, transform 0.2s ease;
+}
+
+.signup-form input:disabled {
+  background-color: #2a2a2a;
+  color: #999;
 }
 
 .signup-form input::placeholder {
   color: #999;
 }
 
+.signup-form input:focus {
+  outline: 1px solid #66bb6a;
+  transform: scale(1.02);
+}
+
 .signup-form button {
-  background-color: #4caf50;
+  background: linear-gradient(to right, #4caf50, #81c784);
   color: black;
   padding: 10px;
   border: none;
   border-radius: 6px;
   font-weight: bold;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s, transform 0.2s ease;
 }
 
 .signup-form button:hover {
   background-color: #66bb6a;
+  transform: translateY(-1px);
 }
 
 .login-text {
@@ -85,4 +100,25 @@ body {
 
 .login-text a:hover {
   text-decoration: underline;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }

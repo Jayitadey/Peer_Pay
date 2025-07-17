@@ -9,20 +9,22 @@ function Signup() {
     username: "",
     email: "",
     password: "",
-    confirmPassword: ""
+    confirmPassword: "",
   });
+
+  const [otpSent, setOtpSent] = useState(false);
+  const [otp, setOtp] = useState("");
 
   const handleChange = (e) => {
     setForm((prev) => ({
       ...prev,
-      [e.target.id]: e.target.value
+      [e.target.id]: e.target.value,
     }));
   };
 
-  const handleSignup = async (e) => {
+  const handleInitialSubmit = async (e) => {
     e.preventDefault();
 
-    // Validate password match
     if (form.password !== form.confirmPassword) {
       alert("Passwords do not match!");
       return;
@@ -32,9 +34,36 @@ function Signup() {
       const res = await fetch("http://localhost:5000/api/auth/signup", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify(form)
+        body: JSON.stringify(form),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        alert(data.msg || "Failed to send OTP");
+        return;
+      }
+
+      alert("OTP sent to your email!");
+      setOtpSent(true);
+    } catch (err) {
+      console.error(err);
+      alert("Error sending OTP");
+    }
+  };
+
+  const handleVerifyOtpAndSignup = async (e) => {
+    e.preventDefault();
+
+    try {
+      const res = await fetch("http://localhost:5000/api/auth/OTP", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ ...form, otp }),
       });
 
       const data = await res.json();
@@ -44,11 +73,8 @@ function Signup() {
         return;
       }
 
-      // Store token and user
       localStorage.setItem("token", data.token);
       localStorage.setItem("user", JSON.stringify(data.user));
-
-      // Navigate to dashboard
       navigate("/dashboard");
     } catch (err) {
       console.error(err);
@@ -61,7 +87,7 @@ function Signup() {
       <div className="signup-box">
         <h2 className="signup-title">Create Your Peer Pay Account</h2>
 
-        <form className="signup-form" onSubmit={handleSignup}>
+        <form className="signup-form" onSubmit={otpSent ? handleVerifyOtpAndSignup : handleInitialSubmit}>
           <label htmlFor="username">Username</label>
           <input
             type="text"
@@ -70,6 +96,7 @@ function Signup() {
             value={form.username}
             onChange={handleChange}
             required
+            disabled={otpSent}
           />
 
           <label htmlFor="email">Email ID</label>
@@ -80,29 +107,48 @@ function Signup() {
             value={form.email}
             onChange={handleChange}
             required
+            disabled={otpSent}
           />
 
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            placeholder="Enter your password"
-            value={form.password}
-            onChange={handleChange}
-            required
-          />
+          {!otpSent && (
+            <>
+              <label htmlFor="password">Password</label>
+              <input
+                type="password"
+                id="password"
+                placeholder="Enter your password"
+                value={form.password}
+                onChange={handleChange}
+                required
+              />
 
-          <label htmlFor="confirmPassword">Confirm Password</label>
-          <input
-            type="password"
-            id="confirmPassword"
-            placeholder="Re-enter password"
-            value={form.confirmPassword}
-            onChange={handleChange}
-            required
-          />
+              <label htmlFor="confirmPassword">Confirm Password</label>
+              <input
+                type="password"
+                id="confirmPassword"
+                placeholder="Re-enter password"
+                value={form.confirmPassword}
+                onChange={handleChange}
+                required
+              />
+            </>
+          )}
 
-          <button type="submit">Sign Up</button>
+          {otpSent && (
+            <>
+              <label htmlFor="otp">Enter OTP</label>
+              <input
+                type="text"
+                id="otp"
+                placeholder="Enter OTP"
+                value={otp}
+                onChange={(e) => setOtp(e.target.value)}
+                required
+              />
+            </>
+          )}
+
+          <button type="submit">{otpSent ? "Verify & Sign Up" : "Send OTP"}</button>
         </form>
 
         <p className="login-text">

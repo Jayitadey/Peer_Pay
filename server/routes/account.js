@@ -179,9 +179,6 @@ router.post("/withdraw", verifyToken, async (req, res) => {
     res.status(500).json({ msg: "Withdrawal failed" });
   }
 
-
-
-
 });
 
 module.exports = router;

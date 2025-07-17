@@ -1,0 +1,45 @@
+.otp-container {
+  max-width: 400px;
+  margin: auto;
+  padding: 2rem;
+  background: #111;
+  color: #a2f5a2;
+  border-radius: 10px;
+  box-shadow: 0 0 15px #25cc57;
+}
+
+.otp-container input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  background: #1a1a1a;
+  border: 1px solid #333;
+  color: #d4edda;
+  border-radius: 5px;
+}
+
+.otp-container button {
+  width: 100%;
+  margin-top: 15px;
+  padding: 10px;
+  background: #4caf50;
+  border: none;
+  color: black;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.otp-container button:hover {
+  background: #66bb6a;
+}
+
+.otp-success {
+  color: #4caf50;
+  margin-top: 10px;
+}
+
+.otp-error {
+  color: #f44336;
+  margin-top: 10px;
+}

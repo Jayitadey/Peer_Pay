@@ -16,6 +16,7 @@ function LandingPage() {
         
         </nav>
       </header>
+      <div className="animated-coin"></div>
       <main className="landing-main">
         <h2 className="headline">Your Personal Banking Simulator</h2>
         <p className="subtext">
