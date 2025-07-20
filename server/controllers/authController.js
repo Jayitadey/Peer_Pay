@@ -17,6 +17,7 @@ exports.signupUser = async (req, res) => {
     const hashed = await bcrypt.hash(password, 10);
     const otp = generateOTP();
     const otpExpires = Date.now() + 5 * 60 * 1000; // 5 minutes from now
+    
 
     const user = new User({
       username,
@@ -43,6 +44,8 @@ exports.signupUser = async (req, res) => {
     return res.status(500).json({ msg: "Server error" });
   }
 };
+
+
 /*
 exports.signupUser = async (req, res) => {
   const { username, email, password, confirmPassword } = req.body;
@@ -136,6 +139,47 @@ exports.loginUser = async (req, res) => {
     res.status(500).json({ msg: "Server error" });
   }
 
+};
+  
+exports.forgotpassword = async (req, res) => {
+  const { email } = req.body;
+  const user = await User.findOne({ email });
+
+  if (!user) return res.status(400).json({ msg: "User not found" });
+
+  const otp = Math.floor(100000 + Math.random() * 900000).toString();
+  user.otp = otp;
+  user.otpExpiry = new Date(Date.now() + 10 * 60 * 1000); // valid for 10 min
+  await user.save();
+
+  try {
+    await sendEmail(
+      email,
+      "Your OTP for Password Reset",
+      `Your OTP is ${otp}. It is valid for 10 minutes.`
+    );
+    res.json({ msg: "OTP sent to your email" });
+  } catch (err) {
+    res.status(500).json({ msg: "Failed to send OTP" });
+  }
+};
+
+exports.resetPassword = async (req, res) => {
+  const { email, otp, newPassword } = req.body;
+  const user = await User.findOne({ email });
+
+  if (!user) return res.status(400).json({ msg: "User not found" });
+  if (user.otp !== otp || new Date() > user.otpExpiry)
+    return res.status(400).json({ msg: "Invalid or expired OTP" });
+
+  const hashedPassword = await bcrypt.hash(newPassword, 10);
+  user.password = hashedPassword;
+  user.otp = null;
+  user.otpExpiry = null;
+  await user.save();
+
+  res.json({ msg: "Password reset successfully" });
+};
  // const sendEmail = require("../utils/sendemail");
 /*
 exports.sendOtpToEmail = async (req, res) => {
@@ -159,6 +203,5 @@ exports.sendOtpToEmail = async (req, res) => {
    
 };
 */
-};
 
 

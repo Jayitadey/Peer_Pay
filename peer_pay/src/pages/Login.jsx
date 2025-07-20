@@ -43,6 +43,7 @@ function Login() {
 
         <form className="login-form" onSubmit={handleLogin}>
           <label htmlFor="email">Email</label>
+
           <input
             type="email"
             id="email"
@@ -62,6 +63,7 @@ function Login() {
             required
           />
 
+
           <button type="submit">Login</button>
         </form>
 
@@ -70,6 +72,9 @@ function Login() {
           <Link to="/signup" className="signup-link">
             Sign up
           </Link>
+          <div className="forgot-password">
+            <Link to="/ForgotPassword">Forgot Password?</Link>
+          </div>
         </p>
       </div>
     </div>

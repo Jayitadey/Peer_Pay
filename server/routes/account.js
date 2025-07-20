@@ -74,12 +74,11 @@ router.get("/history", verifyToken, async (req, res) => {
   try {
     const userId = req.user.id;
 
-    const transactions = await Transaction.find({
-      $or: [
-        { userId: userId },
-        { recipientId: userId }
-      ]
-    })
+    const transactions = await Transaction.find(
+       
+        { userId: userId }
+      
+    )
       .sort({ timestamp: -1 })
       .populate("userId", "username email") // sender
       .populate("recipientId", "username email") // receiver or sender (depending on context)

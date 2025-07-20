@@ -1,8 +1,14 @@
 import { Link } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import "./dashboard.css";
-
+import {  useNavigate } from "react-router-dom";
 function Dashboard() {
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    localStorage.removeItem("token"); // remove JWT
+    localStorage.removeItem("user");  // remove user info
+    navigate("/Login"); // redirect to login page
+  };
   const [activeTab, setActiveTab] = useState("balance");
   const [username, setUsername] = useState("");
 
@@ -35,6 +41,11 @@ function Dashboard() {
           <Link to="/withdraw">
             <button onClick={() => setActiveTab("withdraw")}>Withdraw</button>
           </Link>
+         
+          <Link to="/logout">
+            <button onClick={handleLogout} >Logout</button>
+          </Link>
+
         </nav>
       </header>
       

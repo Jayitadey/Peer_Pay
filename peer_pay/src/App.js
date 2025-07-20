@@ -19,6 +19,8 @@ import ViewBalance from "./pages/balance";
 import TransactionHistory from "./pages/transaction";
 import Transfer from "./pages/121";
 import Withdraw from "./pages/withdraw";
+import ForgotPassword from './pages/ForgotPassword';
+
 
 function App() {
   return (
@@ -33,6 +35,7 @@ function App() {
         <Route path="/transaction" element={<TransactionHistory />} />
         <Route path="/121" element={<Transfer />} />
         <Route path="/withdraw" element={<Withdraw />} />
+        <Route path="/ForgotPassword" element={<ForgotPassword />} />
       </Routes>
     </Router>
   );

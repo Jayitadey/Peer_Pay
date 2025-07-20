@@ -94,9 +94,6 @@ body {
   font-size: 2.8rem;
   margin-bottom: 1rem;
   color: #99e699;
-  background: linear-gradient(90deg, #70ff70, #1aff66);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
 }
 
 .subtext {
