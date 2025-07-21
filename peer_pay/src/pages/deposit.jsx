@@ -18,7 +18,7 @@ const Deposit = () => {
     }
 
     try {
-      const res = await fetch("http://localhost:5000/api/account/deposit", {
+      const res = await fetch("https://peer-pay-1.onrender.com/api/account/deposit", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

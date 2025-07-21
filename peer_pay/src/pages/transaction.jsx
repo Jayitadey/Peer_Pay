@@ -16,7 +16,7 @@ const TransactionHistory = () => {
       }
 
       try {
-        const res = await fetch("http://localhost:5000/api/account/history", {
+        const res = await fetch("https://peer-pay-1.onrender.com/api/account/history", {
           headers: {
             Authorization: `Bearer ${token}`
           }

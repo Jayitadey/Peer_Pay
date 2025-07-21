@@ -9,7 +9,7 @@ function OtpForm() {
 
   const handleSendOtp = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/auth/send-otp", {
+      const res = await fetch("https://peer-pay-1.onrender.com/api/auth/send-otp", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, phone }),

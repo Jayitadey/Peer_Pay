@@ -16,7 +16,7 @@ const ViewBalance = () => {
       }
 
       try {
-        const res = await fetch("http://localhost:5000/api/account/balance", {
+        const res = await fetch("https://peer-pay-1.onrender.com/api/account/balance", {
           headers: {
             Authorization: `Bearer ${token}`
           }

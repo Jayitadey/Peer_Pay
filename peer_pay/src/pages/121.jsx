@@ -14,7 +14,7 @@ function Transfer() {
 
     try {
       const token = localStorage.getItem("token"); // Assumes token is stored at login
-      const response = await fetch("http://localhost:5000/api/account/transfer", {
+      const response = await fetch("https://peer-pay-1.onrender.com/api/account/transfer", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
