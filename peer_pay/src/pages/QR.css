@@ -1,0 +1,17 @@
+.qr-container {
+  background: #0f172a;
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  color: #e0f2fe;
+  box-shadow: 0 0 12px rgba(0, 255, 255, 0.2);
+  max-width: 300px;
+  margin: auto;
+}
+.qr-wrapper {
+  min-height: 100vh;
+  background: #0f172a;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

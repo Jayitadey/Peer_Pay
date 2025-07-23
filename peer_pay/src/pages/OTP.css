@@ -1,45 +1,107 @@
+/* OTP Page Container */
 .otp-container {
-  max-width: 400px;
+  background: rgba(15, 23, 42, 0.9);
+  padding: 2rem 2.2rem;
+  border-radius: 14px;
+  width: 100%;
+  max-width: 380px;
+  color: #e0f2fe;
+  box-shadow: 0 8px 24px rgba(59, 130, 246, 0.2);
+  animation: fadeInScale 0.5s ease-out;
+  backdrop-filter: blur(12px);
   margin: auto;
-  padding: 2rem;
-  background: #111;
-  color: #a2f5a2;
-  border-radius: 10px;
-  box-shadow: 0 0 15px #25cc57;
+  margin-top: 10vh;
 }
 
+/* Title */
+.otp-title {
+  font-size: 1.7rem;
+  margin-bottom: 1.2rem;
+  color: #93c5fd;
+  text-align: center;
+}
+
+/* Inputs */
 .otp-container input {
   width: 100%;
   padding: 10px;
   margin-top: 10px;
-  background: #1a1a1a;
-  border: 1px solid #333;
-  color: #d4edda;
-  border-radius: 5px;
+  background: #1e293b;
+  border: 1px solid #334155;
+  color: #e2e8f0;
+  border-radius: 8px;
+  transition: border 0.2s ease, box-shadow 0.3s ease;
 }
 
+.otp-container input::placeholder {
+  color: #94a3b8;
+}
+
+.otp-container input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.4);
+}
+
+/* Button */
 .otp-container button {
   width: 100%;
   margin-top: 15px;
-  padding: 10px;
-  background: #4caf50;
+  padding: 11px;
+  background: linear-gradient(to right, #3b82f6, #60a5fa);
   border: none;
-  color: black;
+  color: white;
   font-weight: bold;
-  border-radius: 5px;
+  font-size: 1rem;
+  border-radius: 8px;
   cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 6px 14px rgba(59, 130, 246, 0.3);
 }
 
 .otp-container button:hover {
-  background: #66bb6a;
+  background: linear-gradient(to right, #60a5fa, #3b82f6);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(59, 130, 246, 0.45);
 }
 
+/* Messages */
 .otp-success {
-  color: #4caf50;
+  color: #4ade80;
+  font-weight: 500;
   margin-top: 10px;
 }
 
 .otp-error {
-  color: #f44336;
+  color: #f87171;
+  font-weight: 500;
   margin-top: 10px;
+}
+
+/* Responsive for Vivo Y22 & others */
+@media (max-width: 400px) {
+  .otp-container {
+    padding: 1.5rem 1.4rem;
+  }
+
+  .otp-title {
+    font-size: 1.5rem;
+  }
+
+  .otp-container input,
+  .otp-container button {
+    font-size: 0.95rem;
+  }
+}
+
+/* Animations (shared with login) */
+@keyframes fadeInScale {
+  0% {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
 }

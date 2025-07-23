@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./balance.css";
 
 const ViewBalance = () => {
   const [balance, setBalance] = useState(null);
@@ -18,8 +17,8 @@ const ViewBalance = () => {
       try {
         const res = await fetch("https://peer-pay-1.onrender.com/api/account/balance", {
           headers: {
-            Authorization: `Bearer ${token}`
-          }
+            Authorization: `Bearer ${token}`,
+          },
         });
 
         const data = await res.json();
@@ -38,13 +37,19 @@ const ViewBalance = () => {
   }, [navigate]);
 
   return (
-    <div className="balance-container">
-      <div className="balance-box">
-        <h2 className="balance-title">Your Account Balance</h2>
+    <div className="min-h-screen bg-gradient-to-b from-blue-100 to-blue-200 flex items-center justify-center p-4">
+      <div className="bg-white rounded-2xl shadow-lg p-8 w-full max-w-md text-center space-y-6">
+        <i className="fas fa-wallet text-blue-700 text-5xl mb-2"></i>
+        <h2 className="text-2xl font-bold text-blue-800">Your Account Balance</h2>
+
         {balance !== null ? (
-          <p className="balance-amount">₹ {balance.toFixed(2)}</p>
+          <p className="text-4xl font-bold text-green-600 animate-pulse">
+            ₹ {balance.toFixed(2)}
+          </p>
+        ) : error ? (
+          <p className="text-red-600 font-semibold">{error}</p>
         ) : (
-          <p className="balance-error">{error || "Loading..."}</p>
+          <p className="text-blue-600 font-medium animate-pulse">Loading...</p>
         )}
       </div>
     </div>

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "./121.css"; // Create this to match your current theme
 
 function Transfer() {
   const [recipientEmail, setRecipientEmail] = useState("");
@@ -13,7 +12,7 @@ function Transfer() {
     setError("");
 
     try {
-      const token = localStorage.getItem("token"); // Assumes token is stored at login
+      const token = localStorage.getItem("token");
       const response = await fetch("https://peer-pay-1.onrender.com/api/account/transfer", {
         method: "POST",
         headers: {
@@ -39,36 +38,51 @@ function Transfer() {
   };
 
   return (
-    <div className="transfer-container">
-      <div className="transfer-box">
-        <h2 className="transfer-title">Send Money</h2>
+    <div className="min-h-screen bg-gradient-to-b from-blue-100 to-blue-200 flex items-center justify-center p-4">
+      <div className="bg-white rounded-xl shadow-xl p-8 w-full max-w-md space-y-6">
+        <h2 className="text-2xl font-bold text-blue-800 text-center">Send Money</h2>
 
-        {message && <p className="transfer-success">{message}</p>}
-        {error && <p className="transfer-error">{error}</p>}
+        {message && <p className="text-green-600 font-medium text-center">{message}</p>}
+        {error && <p className="text-red-600 font-medium text-center">{error}</p>}
 
-        <form className="transfer-form" onSubmit={handleTransfer}>
-          <label htmlFor="recipientEmail">Recipient Email</label>
-          <input
-            type="email"
-            id="recipientEmail"
-            placeholder="Enter recipient's email"
-            value={recipientEmail}
-            onChange={(e) => setRecipientEmail(e.target.value)}
-            required
-          />
+        <form onSubmit={handleTransfer} className="space-y-4">
+          <div>
+            <label htmlFor="recipientEmail" className="block text-sm font-medium text-blue-700">
+              Recipient Email
+            </label>
+            <input
+              type="email"
+              id="recipientEmail"
+              value={recipientEmail}
+              onChange={(e) => setRecipientEmail(e.target.value)}
+              required
+              placeholder="Enter recipient's email"
+              className="w-full mt-1 p-3 border border-blue-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
 
-          <label htmlFor="amount">Amount</label>
-          <input
-            type="number"
-            id="amount"
-            placeholder="Enter amount"
-            value={amount}
-            onChange={(e) => setAmount(e.target.value)}
-            required
-            min={1}
-          />
+          <div>
+            <label htmlFor="amount" className="block text-sm font-medium text-blue-700">
+              Amount
+            </label>
+            <input
+              type="number"
+              id="amount"
+              value={amount}
+              onChange={(e) => setAmount(e.target.value)}
+              required
+              min={1}
+              placeholder="Enter amount"
+              className="w-full mt-1 p-3 border border-blue-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
 
-          <button type="submit">Transfer</button>
+          <button
+            type="submit"
+            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg transition duration-200"
+          >
+            Transfer
+          </button>
         </form>
       </div>
     </div>

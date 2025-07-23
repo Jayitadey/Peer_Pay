@@ -1,83 +1,156 @@
+/* Base reset */
 body {
   margin: 0;
   padding: 0;
   font-family: "Segoe UI", sans-serif;
-  background-color: #0d0d0d;
-  color: #d4edda;
+  background: linear-gradient(180deg, #0f172a, #1e293b);
+  color: #e0f2fe;
+  scroll-behavior: smooth;
 }
 
+/* Container */
 .login-container {
-  background-color: #0a0a0a;
+  background: transparent;
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-}
-.login-box {
-  background-color: #111;
-  padding: 2rem 2.5rem;
-  border-radius: 12px;
-  box-shadow: 0 0 12px #1c1c1c;
-  width: 100%;
-  max-width: 400px;
-  color: #a2f5a2;
+  padding: 1rem;
 }
 
+/* Box */
+.login-box {
+  background: rgba(15, 23, 42, 0.9);
+  padding: 2rem 2.2rem;
+  border-radius: 14px;
+  width: 100%;
+  max-width: 380px;
+  color: #e0f2fe;
+  box-shadow: 0 8px 24px rgba(59, 130, 246, 0.2);
+  animation: fadeInScale 0.5s ease-out;
+  backdrop-filter: blur(12px);
+}
+
+/* Title */
 .login-title {
   font-size: 1.8rem;
   margin-bottom: 1.5rem;
-  color: #6ee96e;
+  color: #93c5fd;
   text-align: center;
+  animation: slideFadeIn 0.4s ease-out;
 }
+
+/* Form */
 .login-form {
   display: flex;
   flex-direction: column;
+  animation: slideFadeIn 0.6s ease-out;
 }
 
 .login-form label {
-  margin: 0.5rem 0 0.2rem;
+  margin: 0.6rem 0 0.3rem;
   font-weight: 500;
+  color: #cbd5e1;
 }
 
 .login-form input {
   padding: 10px;
-  border: none;
-  border-radius: 6px;
-  background-color: #1f1f1f;
-  color: #e0ffe0;
-  margin-bottom: 1rem;
-}
-.login-form input::placeholder {
-  color: #999;
+  border: 1px solid #334155;
+  border-radius: 8px;
+  background-color: #1e293b;
+  color: #e2e8f0;
+  margin-bottom: 1.2rem;
+  transition: border 0.2s ease, box-shadow 0.3s ease;
 }
 
+.login-form input::placeholder {
+  color: #94a3b8;
+}
+
+.login-form input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.4);
+}
+
+/* Button */
 .login-form button {
-  background-color: #4caf50;
-  color: black;
-  padding: 10px;
+  background: linear-gradient(to right, #3b82f6, #60a5fa);
+  color: white;
+  padding: 11px;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   font-weight: bold;
+  font-size: 1rem;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: background 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 6px 14px rgba(59, 130, 246, 0.3);
 }
 
 .login-form button:hover {
-  background-color: #66bb6a;
+  background: linear-gradient(to right, #60a5fa, #3b82f6);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(59, 130, 246, 0.45);
 }
 
-.signup-text,.forgot-password {
+/* Footer text */
+.signup-text,
+.forgot-password {
   text-align: center;
   font-size: 0.9rem;
   margin-top: 1rem;
-  color: #b2f2b2;
+  color: #cbd5e1;
+  animation: slideFadeIn 0.8s ease-out;
 }
 
 .signup-text a {
-  color: #7fff7f;
+  color: #60a5fa;
   text-decoration: none;
+  font-weight: 500;
 }
 
 .signup-text a:hover {
   text-decoration: underline;
+}
+
+/* Responsive: perfect for Vivo Y22 */
+@media (max-width: 400px) {
+  .login-box {
+    padding: 1.5rem 1.4rem;
+  }
+
+  .login-title {
+    font-size: 1.5rem;
+  }
+
+  .login-form button {
+    font-size: 0.95rem;
+  }
+
+  .login-form input {
+    font-size: 0.95rem;
+  }
+}
+
+/* Animations */
+@keyframes fadeInScale {
+  0% {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

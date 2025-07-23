@@ -48,32 +48,54 @@ function OtpForm() {
   };
 
   return (
-    <div className="otp-container">
-      <h2>Verify Your Identity</h2>
-      <input
-        type="email"
-        placeholder="Enter your Email (optional)"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <input
-        type="tel"
-        placeholder="Enter your Phone Number (optional)"
-        value={phone}
-        onChange={(e) => setPhone(e.target.value)}
-      />
-      <button onClick={handleSendOtp}>Send OTP</button>
+    <div className="min-h-screen bg-gradient-to-b from-blue-100 to-blue-200 flex items-center justify-center px-4">
+      <div className="bg-white shadow-xl rounded-2xl p-8 w-full max-w-md space-y-5 text-center">
+        <i className="fas fa-shield-alt text-blue-600 text-5xl animate-pulse"></i>
+        <h2 className="text-2xl font-bold text-blue-800">Verify Your Identity</h2>
 
-      <input
-        type="text"
-        placeholder="Enter OTP"
-        value={otp}
-        onChange={(e) => setOtp(e.target.value)}
-      />
-      <button onClick={handleVerifyOtp}>Verify OTP</button>
+        <div className="space-y-3">
+          <input
+            type="email"
+            placeholder="📧 Enter your Email (optional)"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="w-full px-4 py-2 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
 
-      {msg && <p className="otp-success">{msg}</p>}
-      {error && <p className="otp-error">{error}</p>}
+          <input
+            type="tel"
+            placeholder="📱 Enter your Phone Number (optional)"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+            className="w-full px-4 py-2 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+
+          <button
+            onClick={handleSendOtp}
+            className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg text-lg font-medium transition"
+          >
+            Send OTP
+          </button>
+
+          <input
+            type="text"
+            placeholder="🔐 Enter OTP"
+            value={otp}
+            onChange={(e) => setOtp(e.target.value)}
+            className="w-full px-4 py-2 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+
+          <button
+            onClick={handleVerifyOtp}
+            className="w-full bg-green-600 hover:bg-green-700 text-white py-2 rounded-lg text-lg font-medium transition"
+          >
+            Verify OTP
+          </button>
+
+          {msg && <p className="text-green-600 text-sm font-medium">{msg}</p>}
+          {error && <p className="text-red-600 text-sm font-medium">{error}</p>}
+        </div>
+      </div>
     </div>
   );
 }

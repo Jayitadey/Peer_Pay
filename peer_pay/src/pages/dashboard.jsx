@@ -1,84 +1,79 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import React, { useState, useEffect } from "react";
-import "./dashboard.css";
-import {  useNavigate } from "react-router-dom";
+
 function Dashboard() {
   const navigate = useNavigate();
-  const handleLogout = () => {
-    localStorage.removeItem("token"); // remove JWT
-    localStorage.removeItem("user");  // remove user info
-    navigate("/Login"); // redirect to login page
-  };
-  const [activeTab, setActiveTab] = useState("balance");
   const [username, setUsername] = useState("");
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
-    // Get user info from localStorage (set after login)
     const storedUser = localStorage.getItem("user");
     if (storedUser) {
-      const user = JSON.parse(storedUser);
-      setUsername(user.username || "User");
+      const parsedUser = JSON.parse(storedUser);
+      setUser(parsedUser);
+      setUsername(parsedUser.username || "User");
     }
   }, []);
 
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    navigate("/Login");
+  };
+
+  const cardBaseClasses =
+    "dashboard-card bg-white rounded-xl shadow-md hover:shadow-lg transition duration-300 p-6 flex flex-col items-center justify-center text-center space-y-3";
+
+  const iconClasses = "text-5xl mb-2"; // larger icon + spacing
+
   return (
-    <div className="dashboard-container">
-      <header className="dashboard-header">
-        <h1>Peer Pay</h1>
-        <nav className="dashboard-nav">
-          <Link to="/balance">
-            <button onClick={() => setActiveTab("balance")}>View Balance</button>
-          </Link>
-          <Link to="/121">
-            <button onClick={() => setActiveTab("transfer")}>One-to-One Transaction</button>
-          </Link>
-          <Link to="/transaction">
-            <button onClick={() => setActiveTab("history")}>Transaction History</button>
-          </Link>
-          <Link to="/deposit">
-            <button onClick={() => setActiveTab("deposit")}>Deposit Money</button>
-          </Link>
-          <Link to="/withdraw">
-            <button onClick={() => setActiveTab("withdraw")}>Withdraw</button>
-          </Link>
-         
-          <Link to="/logout">
-            <button onClick={handleLogout} >Logout</button>
-          </Link>
-
-        </nav>
+    <div className="min-h-screen bg-gradient-to-b from-blue-100 to-blue-200 p-6">
+      {/* Header */}
+      <header className="mb-8 text-center">
+        <h1 className="text-4xl font-bold text-blue-800 mb-2">PEER PAY</h1>
+        <p className="text-blue-700 text-lg">Welcome, {username}!</p>
       </header>
-      
-   <div className="dashboard-user"><b>Welcome, {username}!</b></div> 
-      <main className="dashboard-main">
-        {activeTab === "balance" && (
-          <section className="dashboard-section">
-            {/* Your balance component will go here */}
-          </section>
-        )}
 
-        {activeTab === "transfer" && (
-          <section className="dashboard-section">
-            <h2>Send Money</h2>
-            <form className="transfer-form">
-              <input type="text" placeholder="Recipient Username" />
-              <input type="number" placeholder="Amount (₹)" />
-              <button type="submit">Send</button>
-            </form>
-          </section>
-        )}
+      {/* Dashboard Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+        <Link to="/balance" className={cardBaseClasses}>
+          <i className={`fas fa-wallet text-blue-700 ${iconClasses}`}></i>
+          <span className="text-lg font-semibold text-blue-800">View Balance</span>
+        </Link>
 
-        {activeTab === "history" && (
-          <section className="dashboard-section">
-            <h2>Transaction History</h2>
-            <ul className="transaction-list">
-              <li>Sent ₹500 to user123 on 1 Jul</li>
-              <li>Received ₹200 from friend456 on 29 Jun</li>
-              <li>Sent ₹1,000 to mom001 on 25 Jun</li>
-            </ul>
-          </section>
-        )}
-      </main>
+        <Link to="/121" className={cardBaseClasses}>
+          <i className={`fas fa-paper-plane text-blue-700 ${iconClasses}`}></i>
+          <span className="text-lg font-semibold text-blue-800">One-to-One Transaction</span>
+        </Link>
+
+        <Link to="/deposit" className={cardBaseClasses}>
+          <i className={`fas fa-arrow-circle-down text-blue-700 ${iconClasses}`}></i>
+          <span className="text-lg font-semibold text-blue-800">Deposit Money</span>
+        </Link>
+
+        <Link to="/transaction" className={cardBaseClasses}>
+          <i className={`fas fa-history text-blue-700 ${iconClasses}`}></i>
+          <span className="text-lg font-semibold text-blue-800">Transaction History</span>
+        </Link>
+
+        <Link to="/withdraw" className={cardBaseClasses}>
+          <i className={`fas fa-arrow-circle-up text-blue-700 ${iconClasses}`}></i>
+          <span className="text-lg font-semibold text-blue-800">Withdraw</span>
+        </Link>
+
+        <Link to="/QR" state={{ user }} className={cardBaseClasses}>
+          <i className={`fas fa-qrcode text-blue-700 ${iconClasses}`}></i>
+          <span className="text-lg font-semibold text-blue-800">QR Scan</span>
+        </Link>
+
+        <button
+          onClick={handleLogout}
+          className={`${cardBaseClasses} bg-red-100 hover:bg-red-200`}
+        >
+          <i className={`fas fa-sign-out-alt text-red-700 ${iconClasses}`}></i>
+          <span className="text-lg font-semibold text-red-700">Logout</span>
+        </button>
+      </div>
     </div>
   );
 }

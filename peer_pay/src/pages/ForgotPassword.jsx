@@ -1,5 +1,4 @@
 import { useState } from "react";
-import "./ForgotPassword.css";
 
 function ForgotPassword() {
   const [email, setEmail] = useState("");
@@ -52,32 +51,43 @@ function ForgotPassword() {
   };
 
   return (
-    <div className="forgot-container">
-      <div className="forgot-box">
-        <h2>Forgot Password</h2>
+    <div className="min-h-screen bg-gradient-to-b from-blue-100 to-blue-200 flex items-center justify-center px-4">
+      <div className="bg-white shadow-xl rounded-2xl p-8 w-full max-w-md text-center space-y-6">
+        <i className="fas fa-unlock-alt text-blue-700 text-5xl animate-pulse"></i>
+        <h2 className="text-2xl font-bold text-blue-800">Forgot Password</h2>
+
         <input
           type="email"
-          placeholder="Enter your email"
+          placeholder="✉️ Enter your email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          className="w-full px-4 py-2 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
+
         {otpSent && (
           <>
             <input
               type="text"
-              placeholder="Enter OTP"
+              placeholder="🔑 Enter OTP"
               value={otp}
               onChange={(e) => setOtp(e.target.value)}
+              className="w-full px-4 py-2 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
+
             <input
               type="password"
-              placeholder="New Password"
+              placeholder="🔒 New Password"
               value={newPassword}
               onChange={(e) => setNewPassword(e.target.value)}
+              className="w-full px-4 py-2 border border-blue-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </>
         )}
-        <button onClick={otpSent ? resetPassword : sendOtp}>
+
+        <button
+          onClick={otpSent ? resetPassword : sendOtp}
+          className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg text-lg font-medium transition"
+        >
           {otpSent ? "Reset Password" : "Send OTP"}
         </button>
       </div>

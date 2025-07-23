@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "./Login.css";
 
 function Login() {
   const navigate = useNavigate();
@@ -24,11 +23,9 @@ function Login() {
         return;
       }
 
-      // Store token and user data
       localStorage.setItem("token", data.token);
       localStorage.setItem("user", JSON.stringify(data.user));
 
-      // Navigate to dashboard
       navigate("/dashboard");
     } catch (err) {
       console.error(err);
@@ -37,45 +34,61 @@ function Login() {
   };
 
   return (
-    <div className="login-container">
-      <div className="login-box">
-        <h2 className="login-title">Login to Peer Pay</h2>
+    <div className="min-h-screen bg-gradient-to-br from-blue-100 to-blue-300 flex items-center justify-center px-4">
+      <div className="bg-white p-8 sm:p-10 rounded-2xl shadow-xl w-full max-w-md animate-fade-in">
+        <h2 className="text-2xl font-bold text-blue-800 mb-6 text-center">Login to Peer Pay</h2>
 
-        <form className="login-form" onSubmit={handleLogin}>
-          <label htmlFor="email">Email</label>
+        <form className="space-y-4" onSubmit={handleLogin}>
+          <div>
+            <label htmlFor="email" className="block text-sm font-medium text-blue-700">
+              Email
+            </label>
+            <input
+              type="email"
+              id="email"
+              className="mt-1 w-full px-4 py-2 border border-blue-200 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Enter your email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
 
-          <input
-            type="email"
-            id="email"
-            placeholder="Enter your email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
+          <div>
+            <label htmlFor="password" className="block text-sm font-medium text-blue-700">
+              Password
+            </label>
+            <input
+              type="password"
+              id="password"
+              className="mt-1 w-full px-4 py-2 border border-blue-200 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Enter your password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
 
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            placeholder="Enter your password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-
-
-          <button type="submit">Login</button>
+          <button
+            type="submit"
+            className="w-full bg-blue-700 hover:bg-blue-800 text-white font-semibold py-2 px-4 rounded-md transition duration-200"
+          >
+            Login
+          </button>
         </form>
 
-        <p className="signup-text">
+        <div className="text-sm text-center text-blue-700 mt-6">
           Don’t have an account?{" "}
-          <Link to="/signup" className="signup-link">
+          <Link to="/signup" className="text-blue-900 font-medium hover:underline">
             Sign up
           </Link>
-          <div className="forgot-password">
-            <Link to="/ForgotPassword">Forgot Password?</Link>
-          </div>
-        </p>
+        </div>
+
+        <div className="text-sm text-center mt-2">
+          <Link to="/ForgotPassword" className="text-blue-600 hover:underline">
+            Forgot Password?
+          </Link>
+        </div>
       </div>
     </div>
   );

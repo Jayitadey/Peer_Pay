@@ -1,6 +1,9 @@
+/* deposit.css */
+
 body {
-  background-color: #000;
-  color: #d0ffd0;
+  margin: 0;
+  background: linear-gradient(180deg, #0f172a, #1e293b);
+  color: #e0f2fe;
   font-family: "Segoe UI", sans-serif;
 }
 
@@ -9,54 +12,109 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 90vh;
+  padding: 1rem;
 }
 
 .deposit-box {
-  background-color: #111;
-  padding: 30px 40px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 255, 0, 0.2);
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(14px);
+  padding: 2.5rem 2rem;
+  border-radius: 16px;
+  box-shadow: 0 10px 28px rgba(59, 130, 246, 0.4); /* Blue glow */
   width: 90%;
-  max-width: 400px;
+  max-width: 420px;
+  animation: fadeInScale 0.5s ease-out;
 }
 
 .deposit-title {
   text-align: center;
-  color: #98fb98;
-  margin-bottom: 20px;
+  font-size: 1.6rem;
+  color: #8fbff9; /* Soft blue */
+  margin-bottom: 1.2rem;
+  animation: slideFadeIn 0.4s ease-out;
 }
 
 .deposit-form label {
   display: block;
-  margin: 10px 0 5px;
+  margin: 0.8rem 0 0.3rem;
+  color: #bfdbfe; /* Light blue */
 }
 
 .deposit-form input {
   width: 100%;
-  padding: 10px;
-  border: 1px solid #2d5f2d;
-  border-radius: 5px;
-  background-color: #000;
-  color: #d0ffd0;
+  padding: 0.7rem;
+  border: 1px solid #3b82f6; /* Medium blue */
+  border-radius: 8px;
+  background-color: rgba(30, 41, 59, 0.9);
+  color: white;
+  font-size: 1rem;
+  transition: border 0.3s;
+}
+
+.deposit-form input:focus {
+  border-color: #60a5fa; /* Soft blue */
+  outline: none;
 }
 
 .deposit-form button {
   width: 100%;
-  padding: 12px;
-  margin-top: 15px;
-  background-color: #3a5f3a;
-  color: white;
+  padding: 0.8rem;
+  margin-top: 1.2rem;
+  background-color: rgb(127, 173, 248); /* Blue */
+  color: #0f172a;
+  font-weight: bold;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
   cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .deposit-form button:hover {
-  background-color: #4f754f;
+  background-color: #2563eb; /* Darker blue */
+  transform: scale(1.03);
 }
 
 .deposit-message {
   text-align: center;
-  margin-top: 20px;
-  color: #9fef9f;
+  margin-top: 1rem;
+  color: #93c5fd; /* Soft sky blue */
+  font-weight: 500;
+}
+
+/* Animations */
+@keyframes fadeInScale {
+  0% {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 450px) {
+  .deposit-box {
+    padding: 2rem 1.4rem;
+  }
+
+  .deposit-title {
+    font-size: 1.4rem;
+  }
+
+  .deposit-form input {
+    font-size: 0.95rem;
+  }
 }
