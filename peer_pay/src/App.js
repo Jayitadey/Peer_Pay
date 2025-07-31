@@ -21,6 +21,8 @@ import Transfer from "./pages/121";
 import Withdraw from "./pages/withdraw";
 import ForgotPassword from './pages/ForgotPassword';
 import QR from "./pages/QR";
+import QRPay from "./pages/QRPay"; // adjust path
+
 
 function App() {
   return (
@@ -37,6 +39,7 @@ function App() {
         <Route path="/withdraw" element={<Withdraw />} />
         <Route path="/ForgotPassword" element={<ForgotPassword />} />
         <Route path="/QR" element={<QR />} />
+        <Route path="/QRPay" element={<QRPay />} />
       </Routes>
     </Router>
   );

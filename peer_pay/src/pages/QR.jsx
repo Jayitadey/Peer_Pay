@@ -14,13 +14,13 @@ function QR() {
   const qrValue = JSON.stringify({
     email: user.email,
     userId: user._id,
-    name: user.name,
+    name: user.username,
   });
 
   return (
     <div className="qr-wrapper">
       <div className="qr-container">
-        <h2>{user.name ? `${user.name}'s QR Code` : "User's QR Code"}</h2>
+        <h2>{user.username? `${user.username}'s QR Code` : "User's QR Code"}</h2>
         <QRCodeCanvas value={qrValue} size={256} fgColor="#4ade80" bgColor="#0f172a" />
       </div>
     </div>

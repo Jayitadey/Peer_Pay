@@ -66,6 +66,11 @@ function Dashboard() {
           <span className="text-lg font-semibold text-blue-800">QR Scan</span>
         </Link>
 
+        <Link to="/QRPay" state={{ user }} className={cardBaseClasses}>
+          <i className={`fas fa-qrcode text-blue-700 ${iconClasses}`}></i>
+          <span className="text-lg font-semibold text-blue-800">QR Pay</span>
+        </Link>
+
         <button
           onClick={handleLogout}
           className={`${cardBaseClasses} bg-red-100 hover:bg-red-200`}

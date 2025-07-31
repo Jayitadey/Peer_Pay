@@ -1,0 +1,43 @@
+.qrpay-container {
+  background: #0f172a;
+  color: #e0f2fe;
+  max-width: 400px;
+  margin: 40px auto;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 0 12px rgba(0, 255, 255, 0.1);
+  text-align: center;
+}
+
+.qrpay-title {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+}
+
+.payment-section input {
+  padding: 10px;
+  width: 80%;
+  margin-top: 10px;
+  border: none;
+  border-radius: 8px;
+}
+
+.payment-section button {
+  margin-top: 10px;
+  padding: 10px 20px;
+  background-color: #38bdf8;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.error-text {
+  color: #f87171;
+  margin-top: 10px;
+}
+
+.success-text {
+  color: #4ade80;
+  margin-top: 10px;
+}
