@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Loading from "./loading"; 
 
 const Deposit = () => {
   const [amount, setAmount] = useState("");
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
-
+  const [loading,setloading]=useState(false);
   const handleDeposit = async (e) => {
     e.preventDefault();
 
@@ -17,6 +18,7 @@ const Deposit = () => {
     }
 
     try {
+      setloading(true);
       const res = await fetch("https://peer-pay-1.onrender.com/api/account/deposit", {
         method: "POST",
         headers: {
@@ -37,6 +39,8 @@ const Deposit = () => {
     } catch (err) {
       console.error(err);
       setMessage("❌ Server error");
+    }finally{
+      setloading(false);
     }
   };
 
@@ -75,6 +79,9 @@ const Deposit = () => {
           </p>
         )}
       </div>
+      {
+        loading==true?<Loading></Loading>:null
+      }
     </div>
   );
 };

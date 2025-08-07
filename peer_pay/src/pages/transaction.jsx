@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Send, ArrowDownCircle, PiggyBank, ArrowUpCircle } from "lucide-react";
+import Loading from "./loading";
 
 const TransactionHistory = () => {
   const [transactions, setTransactions] = useState([]);
   const [error, setError] = useState("");
   const navigate = useNavigate();
-
+  const [loading,setloading]=useState(false);
   useEffect(() => {
     const fetchTransactions = async () => {
       const token = localStorage.getItem("token");
@@ -16,6 +17,7 @@ const TransactionHistory = () => {
       }
 
       try {
+        setloading(true);
         const res = await fetch("https://peer-pay-1.onrender.com/api/account/history", {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -32,7 +34,9 @@ const TransactionHistory = () => {
       } catch (err) {
         console.error(err);
         setError("Server error");
-      }
+      }finally{
+      setloading(false);
+    }
     };
 
     fetchTransactions();
@@ -96,6 +100,9 @@ const TransactionHistory = () => {
           </ul>
         )}
       </div>
+      {
+        loading==true?<Loading></Loading>:null
+      }
     </div>
   );
 };

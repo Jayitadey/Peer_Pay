@@ -1,15 +1,17 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import Loading from "./loading";
 
 function Login() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const [loading,setloading]=useState(false);
   const handleLogin = async (e) => {
     e.preventDefault();
 
     try {
+      setloading(true);
       const res = await fetch("https://peer-pay-1.onrender.com/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -30,6 +32,8 @@ function Login() {
     } catch (err) {
       console.error(err);
       alert("Something went wrong. Try again.");
+    }finally{
+      setloading(false);
     }
   };
 
@@ -90,6 +94,9 @@ function Login() {
           </Link>
         </div>
       </div>
+      {
+        loading==true?<Loading></Loading>:null
+      }
     </div>
   );
 }

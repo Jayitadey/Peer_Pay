@@ -30,12 +30,17 @@ function Dashboard() {
     <div className="min-h-screen bg-gradient-to-b from-blue-100 to-blue-200 p-6">
       {/* Header */}
       <header className="mb-8 text-center">
-        <h1 className="text-4xl font-bold text-blue-800 mb-2">PEER PAY</h1>
+        <h1 className="text-4xl font-bold text-blue-800 mb-2">PeerPay</h1>
         <p className="text-blue-700 text-lg">Welcome, {username}!</p>
       </header>
 
       {/* Dashboard Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+       <Link to="/VoiceCommand" className={cardBaseClasses}>
+        <i className={`fas fa-microphone text-blue-700 ${iconClasses}`}></i>
+        <span className="text-lg font-semibold text-blue-800">Voice-Based Payments</span>
+        </Link>
+
         <Link to="/balance" className={cardBaseClasses}>
           <i className={`fas fa-wallet text-blue-700 ${iconClasses}`}></i>
           <span className="text-lg font-semibold text-blue-800">View Balance</span>
@@ -66,11 +71,13 @@ function Dashboard() {
           <span className="text-lg font-semibold text-blue-800">QR Scan</span>
         </Link>
 
-        <Link to="/QRPay" state={{ user }} className={cardBaseClasses}>
+        <Link to="/QRScanner" state={{ user }} className={cardBaseClasses}>
           <i className={`fas fa-qrcode text-blue-700 ${iconClasses}`}></i>
-          <span className="text-lg font-semibold text-blue-800">QR Pay</span>
+          <span className="text-lg font-semibold text-blue-800">QR Scanner</span>
         </Link>
 
+        
+        
         <button
           onClick={handleLogout}
           className={`${cardBaseClasses} bg-red-100 hover:bg-red-200`}
@@ -79,6 +86,7 @@ function Dashboard() {
           <span className="text-lg font-semibold text-red-700">Logout</span>
         </button>
       </div>
+
     </div>
   );
 }

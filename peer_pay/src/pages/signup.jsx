@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import Loading from "./loading";
 
 function Signup() {
   const navigate = useNavigate();
-
+  const [loading,setloading]=useState(false);
   const [form, setForm] = useState({
     username: "",
     email: "",
@@ -29,6 +30,7 @@ function Signup() {
     }
 
     try {
+      setloading(true);
       const res = await fetch("https://peer-pay-1.onrender.com/api/auth/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -42,12 +44,15 @@ function Signup() {
     } catch (err) {
       console.error(err);
       alert("Error sending OTP");
+    }finally{
+      setloading(false);
     }
   };
 
   const handleVerifyOtpAndSignup = async (e) => {
     e.preventDefault();
     try {
+      setloading(true);
       const res = await fetch("https://peer-pay-1.onrender.com/api/auth/OTP", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -169,6 +174,9 @@ function Signup() {
           </Link>
         </p>
       </div>
+      {
+        loading==true?<Loading></Loading>:null
+      }
     </div>
   );
 }

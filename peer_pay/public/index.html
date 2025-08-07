@@ -1,4 +1,3 @@
-<!-- public/index.html -->
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -8,10 +7,11 @@
 
     <!-- ✅ Add Tailwind CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-      <link
-  rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-/>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+
     <!-- Optional: Tailwind Config -->
     <script>
       tailwind.config = {
@@ -25,43 +25,144 @@
         },
       };
     </script>
-  
-  <style>
-  @keyframes fade-in {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
 
-  .animate-fade-in {
-    animation: fade-in 0.4s ease forwards;
-  }
+    <!-- ✅ Custom Styles and Animations -->
+    <style>
+      @keyframes fade-in {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
 
-  .delay-500 {
-    animation-delay: 0.5s;
-  }
+      .animate-fade-in {
+        animation: fade-in 0.4s ease forwards;
+      }
 
-  .delay-700 {
-    animation-delay: 0.7s;
-  }
-  .card {
-    @apply bg-white text-blue-800 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-200 p-8 flex flex-col items-center text-center font-medium;
-  }
+      .delay-500 {
+        animation-delay: 0.5s;
+      }
 
-  .card-icon {
-    font-size: 3rem; /* Large icons */
-    margin-bottom: 1rem;
-    color: #1e3a8a; /* Tailwind's blue-900 */
-  }
+      .delay-700 {
+        animation-delay: 0.7s;
+      }
 
-  /* For logout override inside .card */
-  .text-red-700 .card-icon {
-    color: #b91c1c; /* Tailwind's red-700 */
-  }
-</style>
-    <title>React + Tailwind </title>
+      /* Tailwind + Custom Card Styles */
+      .card {
+        background-color: white;
+        color: #1e3a8a;
+        border-radius: 1rem;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        transition: all 0.2s ease;
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        font-weight: 500;
+      }
+
+      .card:hover {
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+      }
+
+      .card-icon {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        color: #1e3a8a;
+      }
+
+      .text-red-700 .card-icon {
+        color: #b91c1c;
+      }
+
+      @keyframes float {
+        0% {
+          transform: translateY(0) rotate(0deg);
+        }
+        50% {
+          transform: translateY(-20px) rotate(10deg);
+        }
+        100% {
+          transform: translateY(0) rotate(0deg);
+        }
+      }
+
+      .animate-float {
+        animation: float 8s ease-in-out infinite;
+      }
+
+      @keyframes floatUp {
+        0% {
+          transform: translateY(0) scale(1);
+          opacity: 0;
+        }
+        50% {
+          opacity: 0.6;
+        }
+        100% {
+          transform: translateY(-120vh) scale(1.3);
+          opacity: 0;
+        }
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        background: linear-gradient(to top right, #a18cd1, #fbc2eb);
+        overflow: hidden;
+      }
+
+      .bubbles {
+        
+        background-image :url ("https://media.istockphoto.com/id/501689883/vector/golden-dollar-symbol.jpg?s=612x612&w=0&k=20&c=FO0QK4W9mLH7jg0VWiYNgWVkmpVvMAGs5ciTRP_T8_U=");
+        background-size: cover;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      .bubble {
+        
+        position: absolute;
+        bottom: -100px;
+        background: rgba(18, 15, 237, 0.966);
+        border-radius: 20%;
+        animation: floatUp var(--duration) ease-in infinite;
+        animation-delay: var(--delay);
+        box-shadow: 0 0 10px rgba(233, 16, 168, 0.892);
+        backdrop-filter: blur(2px);
+        left: var(--left);
+        width: var(--size);
+        height: var(--size);
+      }
+    </style>
+
+    <title>PeerPay</title>
   </head>
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-  </body>
+
+    <!-- ✅ Bubble Elements -->
+    <body>
+  <!-- ✅ Bubble Elements -->
+  <div class="bubbles">
+    <div class="bubble" style="--size: 40px; --left: 10%; --delay: 0s; --duration: 18s;"></div>
+    <div class="bubble" style="--size: 60px; --left: 25%; --delay: 2s; --duration: 22s;"></div>
+    <div class="bubble" style="--size: 50px; --left: 40%; --delay: 4s; --duration: 20s;"></div>
+    <div class="bubble" style="--size: 35px; --left: 55%; --delay: 1s; --duration: 16s;"></div>
+    <div class="bubble" style="--size: 70px; --left: 70%; --delay: 3s; --duration: 25s;"></div>
+    <div class="bubble" style="--size: 45px; --left: 85%; --delay: 5s; --duration: 19s;"></div>
+  </div>
+
+  <!-- ✅ React Root -->
+  <div id="root"></div>
+  <script src="../src/index.js"></script>
+</body>
+
 </html>

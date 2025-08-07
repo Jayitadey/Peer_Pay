@@ -2,7 +2,7 @@ const express = require("express");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 const Transaction = require("../models/transaction");
-
+const cors = require("cors");
 const router = express.Router();
 
 // Auth middleware
@@ -179,5 +179,120 @@ router.post("/withdraw", verifyToken, async (req, res) => {
   }
 
 });
+
+router.get("/user-email", async (req, res) => {
+ try {
+    const users = await User.find({}, "username email");
+    res.json(users);
+  } catch (err) {
+    console.error("Failed to fetch users:", err);
+    res.status(500).json({ msg: "Server error" });
+  }
+});
+
+// routes/geminiNLP.js
+function preprocess(text) {
+  return text
+    .replace(/rs|rupees|rupay|rupya/gi, "") // Remove currency words
+    .replace(/ to /gi, " to ")              // Normalize spacing
+    .trim();
+}
+
+const { GoogleGenerativeAI } = require("@google/generative-ai");
+
+const stringSimilarity = require("string-similarity");
+
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+
+router.post("/gemini-nlp", async (req, res) => {
+  const { spokenText } = req.body;
+  const cleanedText = preprocess(spokenText);
+
+
+  try {
+    const users = await User.find({}, "username email");
+    const userMap = users.map(u => `${u.username}: ${u.email}`).join("\n");
+
+   const prompt = `
+You are an intelligent assistant that extracts "intent", "amount", and "username" from voice command.
+
+1. Accept commands with minor mistakes, like "deba deepa" → "Devadeep".
+2. Match names even if slightly mispronounced or wrongly spelled.
+3. Extract numbers as amounts.
+4. Known users:
+${userMap}
+
+Here are some example inputs and outputs:
+
+Command: "send 500 to devadeep"
+→ { "intent": "send_money", "amount": "500", "username": "Devadeepa" }
+
+Command: "transfer rupees 1000 to arjunsingh"
+→ { "intent": "send_money", "amount": "1000", "username": "Bidya" }
+
+Command: "please give 200 to rahul"
+→ { "intent": "send_money", "amount": "200", "username": "Ankhi" }
+
+
+Command: "please give 200 to rahul"
+→ { "intent": "send_money", "amount": "200", "username": "Prasun" }
+
+
+Command: "please give 200 to rahul"
+→ { "intent": "send_money", "amount": "200", "username": "Jayita" }
+
+Command: "show my balance"
+→ { "intent": "check_balance" }
+
+Now process this:
+Command: "${cleanedText}"
+
+Respond only in valid JSON as shown above.
+If intent is unclear, respond with:
+{ "intent": "unknown" }
+`;
+
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
+    const result = await model.generateContent(prompt);
+    const response = result.response.text().trim();
+
+    console.log("🔥 Gemini Raw Response:\n", response); // 🛠️ Show raw Gemini reply
+
+    let parsed;
+    try {
+      const jsonMatch = response.match(/\{[\s\S]*?\}/);
+      if (!jsonMatch) throw new Error("No JSON in Gemini output");
+      parsed = JSON.parse(jsonMatch[0]);
+    } catch (err) {
+      console.error("❌ Gemini parsing error:", err.message);
+      return res.status(500).json({ intent: "unknown" });
+    }
+
+    if (parsed.intent === "send_money") {
+     const spokenUsername = parsed.username?.toLowerCase();
+const allNames = users.map(u => u.username.toLowerCase());
+
+const matches = stringSimilarity.findBestMatch(spokenUsername, allNames);
+const bestMatchName = matches.bestMatch.target;
+
+// Final match
+const matchedUser = users.find(u => u.username.toLowerCase() === bestMatchName);
+
+      if (matchedUser) {
+        return res.json({
+          intent: parsed.intent,
+          amount: parsed.amount,
+          email: matchedUser.email,
+        });
+      }
+    }
+
+    return res.json({ intent: "unknown" });
+  } catch (error) {
+    console.error("Gemini NLP error:", error.message);
+    return res.status(500).json({ intent: "unknown" });
+  }
+});
+
 
 module.exports = router;

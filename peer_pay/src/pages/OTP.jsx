@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-
+import Loading from "./loading";
 function OtpForm() {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [otp, setOtp] = useState("");
   const [msg, setMsg] = useState("");
   const [error, setError] = useState("");
-
+  const [loading,setloading]=useState(false);
   const handleSendOtp = async () => {
     try {
       const res = await fetch("https://peer-pay-1.onrender.com/api/auth/send-otp", {
@@ -29,6 +29,7 @@ function OtpForm() {
 
   const handleVerifyOtp = async () => {
     try {
+      setloading(true);
       const res = await fetch("http://localhost:5000/api/auth/verify-otp", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -44,6 +45,8 @@ function OtpForm() {
       }
     } catch (err) {
       setError("Server error");
+    }finally{
+      setloading(false);
     }
   };
 
@@ -96,6 +99,9 @@ function OtpForm() {
           {error && <p className="text-red-600 text-sm font-medium">{error}</p>}
         </div>
       </div>
+      {
+        loading==true?<Loading></Loading>:null
+      }
     </div>
   );
 }

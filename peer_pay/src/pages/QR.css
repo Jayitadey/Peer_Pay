@@ -1,16 +1,16 @@
 .qr-container {
-  background: #0f172a;
+  background: #f2f3f5;
   padding: 20px;
   border-radius: 12px;
   text-align: center;
-  color: #e0f2fe;
-  box-shadow: 0 0 12px rgba(0, 255, 255, 0.2);
+  color: #010101;
+  box-shadow: 0 0 12px rgba(245, 247, 247, 0.2);
   max-width: 300px;
   margin: auto;
 }
 .qr-wrapper {
   min-height: 100vh;
-  background: #0f172a;
+  background: #f6f7f8;
   display: flex;
   justify-content: center;
   align-items: center;

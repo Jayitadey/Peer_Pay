@@ -1,10 +1,12 @@
 import { useState } from "react";
+import Loading from "./loading";
 
 function ForgotPassword() {
   const [email, setEmail] = useState("");
   const [otpSent, setOtpSent] = useState(false);
   const [otp, setOtp] = useState("");
   const [newPassword, setNewPassword] = useState("");
+  const [loading,setloading]=useState(false);
 
   const sendOtp = async () => {
     try {
@@ -24,11 +26,14 @@ function ForgotPassword() {
       }
     } catch (err) {
       alert("Something went wrong while sending OTP");
+    }finally{
+      setloading(false);
     }
   };
 
   const resetPassword = async () => {
     try {
+      setloading(true);
       const res = await fetch("http://localhost:5000/api/auth/reset-password", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -91,6 +96,9 @@ function ForgotPassword() {
           {otpSent ? "Reset Password" : "Send OTP"}
         </button>
       </div>
+      {
+        loading==true?<Loading></Loading>:null
+      }
     </div>
   );
 }

@@ -1,14 +1,16 @@
 import React, { useState } from "react";
+import Loading from "./loading";
 
 function Withdraw() {
   const [amount, setAmount] = useState("");
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
-
+  const [loading,setloading]=useState(false);
   const handleWithdraw = async (e) => {
     e.preventDefault();
 
     try {
+      setloading(true);
       const token = localStorage.getItem("token");
 
       const response = await fetch("https://peer-pay-1.onrender.com/api/account/withdraw", {
@@ -33,6 +35,8 @@ function Withdraw() {
     } catch (err) {
       setError("Something went wrong");
       setMessage("");
+    }finally{
+      setloading(false);
     }
   };
 
@@ -72,6 +76,9 @@ function Withdraw() {
           <p className="mt-4 text-red-600 font-medium text-center">{error}</p>
         )}
       </div>
+      {
+        loading==true?<Loading></Loading>:null
+      }
     </div>
   );
 }

@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Loading from "./loading";
 
 const ViewBalance = () => {
   const [balance, setBalance] = useState(null);
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const [loading,setloading]=useState(false); 
 
   useEffect(() => {
     const fetchBalance = async () => {
@@ -15,6 +17,7 @@ const ViewBalance = () => {
       }
 
       try {
+        setloading(true);
         const res = await fetch("https://peer-pay-1.onrender.com/api/account/balance", {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -30,7 +33,9 @@ const ViewBalance = () => {
       } catch (err) {
         console.error(err);
         setError("Server error");
-      }
+      }finally{
+      setloading(false);
+    }
     };
 
     fetchBalance();
@@ -52,6 +57,9 @@ const ViewBalance = () => {
           <p className="text-blue-600 font-medium animate-pulse">Loading...</p>
         )}
       </div>
+      {
+        loading==true?<Loading></Loading>:null
+      }
     </div>
   );
 };

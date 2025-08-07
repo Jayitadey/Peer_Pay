@@ -21,8 +21,11 @@ import Transfer from "./pages/121";
 import Withdraw from "./pages/withdraw";
 import ForgotPassword from './pages/ForgotPassword';
 import QR from "./pages/QR";
-import QRPay from "./pages/QRPay"; // adjust path
-
+import QRScanner from "./pages/QRScanner"; // adjust path
+import VoiceCommand from "./pages/VoiceCommand";
+import Features from "./pages/features";
+import About from "./pages/about";
+import { AlarmClockCheckIcon, AreaChartIcon } from "lucide-react";
 
 function App() {
   return (
@@ -39,10 +42,15 @@ function App() {
         <Route path="/withdraw" element={<Withdraw />} />
         <Route path="/ForgotPassword" element={<ForgotPassword />} />
         <Route path="/QR" element={<QR />} />
-        <Route path="/QRPay" element={<QRPay />} />
+        <Route path="/QRScanner" element={<QRScanner />} />
+        <Route path="/VoiceCommand" element={<VoiceCommand />} />
+        <Route path="/features" element={<Features />} />
+        <Route path="/about" element={<About />} />
       </Routes>
     </Router>
   );
 }
 
 export default App;
+
+

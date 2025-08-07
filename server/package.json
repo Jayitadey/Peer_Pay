@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@google/generative-ai": "^0.24.1",
     "bcryptjs": "^3.0.2",
     "cors": "^2.8.5",
     "dotenv": "^17.0.1",
@@ -8,7 +9,8 @@
     "mongodb": "^6.17.0",
     "mongoose": "^8.16.1",
     "nodemailer": "^7.0.5",
-    "react-toastify": "^11.0.5"
+    "react-toastify": "^11.0.5",
+    "string-similarity": "^4.0.4"
   },
   "name": "server",
   "version": "1.0.0",

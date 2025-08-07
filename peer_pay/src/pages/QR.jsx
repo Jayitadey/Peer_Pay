@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import { QRCodeCanvas } from "qrcode.react";
 import "./QR.css";
 
+
 function QR() {
   const location = useLocation();
   const user = location.state?.user;
@@ -21,7 +22,7 @@ function QR() {
     <div className="qr-wrapper">
       <div className="qr-container">
         <h2>{user.username? `${user.username}'s QR Code` : "User's QR Code"}</h2>
-        <QRCodeCanvas value={qrValue} size={256} fgColor="#4ade80" bgColor="#0f172a" />
+        <QRCodeCanvas value={qrValue} size={256} fgColor="#050505ff" bgColor="#f5f6f7ff" />
       </div>
     </div>
   );

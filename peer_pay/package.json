@@ -3,17 +3,22 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@blackbox-vision/react-qr-reader": "^5.0.0",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.3.0",
     "@testing-library/user-event": "^13.5.0",
+    "framer-motion": "^12.23.12",
+    "html5-qrcode": "^2.3.8",
     "lucide-react": "^0.525.0",
     "qrcode.react": "^4.2.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
+    "react-qr-barcode-scanner": "^2.1.8",
     "react-qr-reader": "^3.0.0-beta-1",
+    "react-qr-scanner": "^1.0.0-alpha.11",
     "react-router-dom": "^7.6.3",
-    "react-scripts": "^5.0.1",
+    "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
