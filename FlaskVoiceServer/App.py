@@ -3,12 +3,14 @@ from flask_cors import CORS
 from fuzzywuzzy import process
 from pymongo import MongoClient
 import spacy
+import os
+
 
 # ✅ Use lightweight blank English pipeline (no external model download)
 nlp = spacy.blank("en")
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, origins=["https://gleeful-gumption-5ee486.netlify.app"])
 
 # MongoDB connection
 client = MongoClient("mongodb+srv://jayitadey609:8lPYcodarMMXXI5X@banksimulator.y9c9xyc.mongodb.net/?retryWrites=true&w=majority&appName=BankSimulator")
@@ -77,4 +79,5 @@ def process_command():
     return jsonify({ "error": "Intent not recognized" })
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
