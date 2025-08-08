@@ -133,7 +133,7 @@ const Voice = () => {
 
       try {
         setloading(true);
-        const response = await fetch("https://peer-pay-1.onrender.com/process-command", {
+        const response = await fetch("http://127.0.0.1:5000/process-command", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ message: spokenText }),
