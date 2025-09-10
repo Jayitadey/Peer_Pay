@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import React from "react";
+import Logo from "./Logo.png";
 
 function LandingPage() {
   return (
@@ -46,13 +47,23 @@ function LandingPage() {
 
         {/* Header */}
         <header className="relative z-10 flex items-center justify-between p-6 bg-white shadow-md">
-          <h1 className="text-3xl font-bold text-blue-700">PeerPay</h1>
-          <nav className="space-x-6 text-blue-700 font-medium">
-            <a href="/features" className="hover:underline">Features</a>
-            <a href="/about" className="hover:underline">About</a>
-            <Link to="/Login" className="hover:underline">Login</Link>
-          </nav>
-        </header>
+  {/* Logo instead of text */}
+  <div className="flex items-center space-x-2">
+    <img 
+      src={Logo}  // ✅ path to your saved logo file
+      alt="Peer Pay " 
+      className="h-10 w-auto"
+    />
+    {/* If you still want the text alongside the logo */}
+    {/* <span className="text-2xl font-bold text-blue-700">PeerPay</span> */}
+  </div>
+
+  <nav className="space-x-6 text-blue-700 font-medium">
+    <a href="/features" className="hover:underline">Features</a>
+    <a href="/about" className="hover:underline">About</a>
+    <Link to="/Login" className="hover:underline">Login</Link>
+  </nav>
+</header>
 
         {/* Main Content */}
         <main className="relative z-10 flex-1 flex flex-col items-center justify-center text-center px-4">

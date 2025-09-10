@@ -3,12 +3,13 @@ from flask_cors import CORS
 from fuzzywuzzy import process
 from pymongo import MongoClient
 import spacy
+import os
 
 # ✅ Use lightweight blank English pipeline (no external model download)
 nlp = spacy.blank("en")
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, origins=["https://gleeful-gumption-5ee486.netlify.app", "http://localhost:3000"])
 
 # MongoDB connection
 client = MongoClient("mongodb+srv://jayitadey609:8lPYcodarMMXXI5X@banksimulator.y9c9xyc.mongodb.net/?retryWrites=true&w=majority&appName=BankSimulator")
@@ -41,7 +42,7 @@ def find_closest_username(spoken_name):
     all_users = list(users.find({}, {"username": 1, "email": 1}))
     usernames = [user['username'].lower() for user in all_users]
     match, score = process.extractOne(spoken_name.lower(), usernames)
-    
+
     if score > 60:
         matched_user = next(user for user in all_users if user['username'].lower() == match)
         return matched_user["email"]
@@ -58,7 +59,7 @@ def process_command():
         amount, spoken_name = extract_amount_and_name(spoken_text)
         email = find_closest_username(spoken_name)
         print(f"🎯 Extracted amount: {amount}, name: {spoken_name}, email: {email}")
-        
+
         if email and amount:
             return jsonify({
                 "page": "/121",
@@ -67,7 +68,7 @@ def process_command():
             })
         else:
             return jsonify({"error": "Could not extract valid recipient or amount."})
-    
+
     elif "balance" in spoken_text:
         return jsonify({ "page": "/balance" })
 
@@ -77,4 +78,7 @@ def process_command():
     return jsonify({ "error": "Intent not recognized" })
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
+
+

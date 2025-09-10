@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import React, { useState, useEffect } from "react";
-
+import Logo from "./Logo.png";
 function Dashboard() {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
@@ -28,19 +28,18 @@ function Dashboard() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-100 to-blue-200 p-6">
-      {/* Header */}
-      <header className="mb-8 text-center">
-        <h1 className="text-4xl font-bold text-blue-800 mb-2">PeerPay</h1>
+      <header className="mb-8 text-center flex flex-col items-center space-y-2">
+        <img
+          src={Logo}
+          alt="PeerPay Logo"
+          className="h-14 w-auto"
+        />
         <p className="text-blue-700 text-lg">Welcome, {username}!</p>
       </header>
 
+    
       {/* Dashboard Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-       <Link to="/VoiceCommand" className={cardBaseClasses}>
-        <i className={`fas fa-microphone text-blue-700 ${iconClasses}`}></i>
-        <span className="text-lg font-semibold text-blue-800">Voice-Based Payments</span>
-        </Link>
-
         <Link to="/balance" className={cardBaseClasses}>
           <i className={`fas fa-wallet text-blue-700 ${iconClasses}`}></i>
           <span className="text-lg font-semibold text-blue-800">View Balance</span>
@@ -68,14 +67,33 @@ function Dashboard() {
 
         <Link to="/QR" state={{ user }} className={cardBaseClasses}>
           <i className={`fas fa-qrcode text-blue-700 ${iconClasses}`}></i>
-          <span className="text-lg font-semibold text-blue-800">QR Scan</span>
+          <span className="text-lg font-semibold text-blue-800">QR</span>
         </Link>
+<Link to="/QRScanner" state={{ user }} className={cardBaseClasses}>
+  {/* Simple Scan Icon */}
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    className={`w-10 h-10 text-blue-700 ${iconClasses}`}
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+    strokeWidth="2"
+  >
+    {/* Corner brackets (scanner frame) */}
+    <path d="M4 7V4h3M20 7V4h-3M4 17v3h3M20 17v3h-3" />
+    
+    {/* Scanning line */}
+    <line x1="4" y1="12" x2="20" y2="12" stroke="currentColor" strokeWidth="2" />
+  </svg>
 
-        <Link to="/QRScanner" state={{ user }} className={cardBaseClasses}>
-          <i className={`fas fa-qrcode text-blue-700 ${iconClasses}`}></i>
-          <span className="text-lg font-semibold text-blue-800">QR Scanner</span>
+  <span className="text-lg font-semibold text-blue-800">QR Scanner</span>
+</Link>
+
+
+       <Link to="/VoiceCommand" className={cardBaseClasses}>
+        <i className={`fas fa-microphone text-blue-700 ${iconClasses}`}></i>
+        <span className="text-lg font-semibold text-blue-800">Voice-Based Payments</span>
         </Link>
-
         
         
         <button
