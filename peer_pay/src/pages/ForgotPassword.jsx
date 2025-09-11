@@ -51,6 +51,7 @@ function ForgotPassword() {
         alert(data.msg || "Failed to reset password");
       }
     } catch (err) {
+      console.log(err)
       alert("Something went wrong during password reset");
     }
   };
