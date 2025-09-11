@@ -160,7 +160,7 @@ exports.forgotpassword = async (req, res) => {
     );
     res.json({ msg: "OTP sent to your email" });
   } catch (err) {
-    console.log(error)
+    console.log(err)
     res.status(500).json({ msg: "Failed to send OTP" });
   }
 };
