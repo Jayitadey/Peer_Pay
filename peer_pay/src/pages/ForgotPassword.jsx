@@ -10,7 +10,7 @@ function ForgotPassword() {
 
   const sendOtp = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/auth/forgot-password", {
+      const res = await fetch("https://peer-pay-1.onrender.com/api/auth/forgot-password", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
@@ -34,7 +34,7 @@ function ForgotPassword() {
   const resetPassword = async () => {
     try {
       setloading(true);
-      const res = await fetch("http://localhost:5000/api/auth/reset-password", {
+      const res = await fetch("https://peer-pay-1.onrender.com/api/auth/reset-password", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, otp, newPassword }),
